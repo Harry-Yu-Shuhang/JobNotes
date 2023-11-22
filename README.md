@@ -40,10 +40,10 @@ drop column column_name
 select xxx as 想要的名字
 
 from xxx...
-
+```
 
 in / not in
-```
+
 
 例子：选出value是1，2或3的quantity
 ```
