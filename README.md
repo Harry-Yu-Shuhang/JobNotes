@@ -17,14 +17,16 @@ CREATE TABLE employees (
 ```
 
 删除表:
-
+```
 drop table 表名
+```
 
 删除行：
-
-delete from table name 
+```
+delete from table name
 
 where...
+```
 
 删除列： 
 
