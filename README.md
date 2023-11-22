@@ -1,6 +1,6 @@
-# Mysql-
-数据分析岗经常考察的sql题目
+Mysql-面试经常考察的sql知识
 
+# 零、基本操作篇
 创建表：
 ```
 CREATE TABLE employees (
@@ -60,7 +60,7 @@ group by：按id分别求和等。
 
 having：接在group by后面，如having sales＞500 and invoices ＜5。having必须跟着group by，跟where的区别在于一个筛选符合条件的聚合函数，一个非聚合
 
-#一、正则（regexp）
+# 一、正则（regexp）
 | 符号  | 意义 |
 | ----- | --- |
 | ^ | 开头 |
@@ -94,7 +94,7 @@ where first_name regexp 'elka|ambur'
 ```
 
 
-#二、order
+# 二、order
 练习
 
 订单2的商品按总价降序排列:
@@ -124,7 +124,7 @@ order by total_price desc
 asc升序，desc降序
 
 
-#三、limit
+# 三、limit
 
 找出积分排名前三的死忠粉
 ```
@@ -141,12 +141,12 @@ limit 3
 如果要找第8-10名呢？用limit 7，3 忽略前七名，从第八名开始取三个
 
 
-#四、计算优先级
+# 四、计算优先级
 ```
 select from (inner join) where + order by +limit
 ```
 
-#五、inner join
+# 五、inner join
 
 订单表连接到顾客信息表（根据顾客id连接）
 ```
@@ -173,7 +173,7 @@ on order.id=customer.id
 同样，inner join customer c就可以把customer简称c
 
 
-六 自连接
+# 六、自连接
 
 例子：输出员工id，员工姓名和他们管理员
 ```
@@ -195,7 +195,7 @@ join employees m
     on e.reports_to = m.employee_id
 ``` 
 
-七 外连接
+# 七、外连接
 ```
 select...
 
@@ -221,7 +221,7 @@ on customer.id=orderid
 a LEFT JOIN b 显示全部的a
 
 
-八 复合链接
+# 八、复合链接
 
 查询所有顾客的所有订单详情：
 ```
@@ -251,7 +251,7 @@ LEFT JOIN shippers sh
 ORDER BY customer_id
 ```
 
-九、using
+# 九、using
 
 当join两个列名相同时可以用来简化（内外链接都可以这么干）
 ```
@@ -276,7 +276,7 @@ LEFT JOIN shippers sh
 ORDER BY order_id
 ```
 
-十、聚合函数
+# 十、聚合函数
 
 聚合函数：输入一系列值并聚合为一个结果的函数
 
@@ -328,7 +328,7 @@ FROM invoicesWHERE invoice_date > '2019-07-01'  -- 想只统计下半年的结�
 ```
 
 
-十一、视图（类似C++的类）
+# 十一、视图（类似C++的类）
 
 就是创建虚拟表，模块化一些重复性的查询模块，简化各种复杂操作（包括复杂的子查询和连接等）
 
