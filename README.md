@@ -8,6 +8,7 @@ CREATE TABLE employees (
     last_name VARCHAR(50),
     email VARCHAR(100)
 );
+
 删除表:
 drop table 表名
 
