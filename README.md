@@ -24,21 +24,33 @@ from xxx...
 
 
 in / not in
+
 例子：选出value是1，2或3的quantity
+
 select *
+
 from 。。。
+
 where value in （1，2，3）
 
 union：链接多个select from where，进行多行筛选。
+
 group by：按id分别求和等。
+
 having：接在group by后面，如having sales＞500 and invoices ＜5。having必须跟着group by，跟where的区别在于一个筛选符合条件的聚合函数，一个非聚合
 
 一、正则（regexp）
+
 符号	意义
+
 ^	开头
+
 $	结尾
+
 [abc]	含abc
+
 [a-c]	含a到c
+
 |	logical or
 
 举例：
@@ -54,9 +66,13 @@ $	结尾
 
 select * 
 from customers
+
 where first_name regexp 'elka|ambur'
+
 /where last_name regexp 'ey$|on$'
+
 /where last_name regexp '^my|se'
+
 /where last_name regexp 'b[ru]'/'br|bu'
 
 
@@ -69,32 +85,47 @@ where first_name regexp 'elka|ambur'
 法1. 可以以总价的数学表达式为排序依据
 
 select * from order_items 
+
 where order_id = 2
+
 order by quantity * unit_price desc
+
 -- 列间数学表达式
+
 法2. 或先定义总价别名，在以别名为排序依据
 
 select *, quantity * unit_price as total_price 
+
 from order_items 
+
 where order_id = 2
+
 order by total_price desc
+
 -- 列别名
 
 asc升序，desc降序
 
 
 三、limit
+
 找出积分排名前三的死忠粉
 
 USE sql_store;
 
 select *
+
 from customers
+
 order by points desc 
+
 limit 3
+
 如果要找第8-10名呢？用limit 7，3 忽略前七名，从第八名开始取三个
 
+
 四、计算优先级
+
 select from (inner join) where + order by +limit
 
 
