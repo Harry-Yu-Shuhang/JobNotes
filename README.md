@@ -2,24 +2,39 @@
 数据分析岗经常考察的sql题目
 
 创建表：
+
 CREATE TABLE employees (
+
     id INT AUTO_INCREMENT PRIMARY KEY,
+    
     first_name VARCHAR(50),
+    
     last_name VARCHAR(50),
+    
     email VARCHAR(100)
+    
 );
 
 删除表:
+
 drop table 表名
 
-删除行：delete from table name 
+删除行：
+
+delete from table name 
+
 where...
 
-删除列： alter table tablename
+删除列： 
+
+alter table tablename
+
 drop column column_name
 
 要把列名重命名：
+
 select xxx as 想要的名字
+
 from xxx...
 
 
@@ -54,6 +69,7 @@ $	结尾
 |	logical or
 
 举例：
+
 分别选择满足如下条件的顾客：
 
 1. first names 是 ELKA 或 AMBUR
@@ -130,77 +146,141 @@ select from (inner join) where + order by +limit
 
 
 五、inner join
+
 订单表连接到顾客信息表（根据顾客id连接）
+
 select *
+
 from order
+
 (inner) join customer
+
 on order.id=customer.id
+
 如果只要顾客信息表中的id，firstname和lastname这几列呢？
+
 把第一行的*改成id，firstname，lastname即可吗？
+
 错！因为两个表都有id这一列
+
 应该改成customer.id或者order.id
+
 最好每句之前都加一个表名
+
 如果需要将order简称为o，只需要from order o就行，注意，这么改了以后，上面的select语句也一定要把order改成o，跟c++的变量必须提前定义不同。
+
 同样，inner join customer c就可以把customer简称c
 
+
 六 自连接
+
 例子：输出员工id，员工姓名和他们管理员
+
 USE sql_hr;
 
+
 select 
+
     e.employee_id,
+    
     e.first_name,
+    
     m.first_name as manager
+    
 from employees e
+
 join employees m
+
     on e.reports_to = m.employee_id
+    
 
 七 外连接
+
 select...
+
 from customer
+
 left join order
+
 on customer.id=orderid
+
 等效于
+
 select...
+
 from order 
+
 right join customer
+
 on customer.id=orderid
+
 选出所有顾客的订单
+
 
 a LEFT JOIN b 显示全部的a
 
+
 八 复合链接
+
 查询所有顾客的所有订单详情：
+
 USE sql_store;
 
+
 SELECT 
+
     c.customer_id,
+    
     c.first_name,
+    
     o.order_id,
+    
     sh.name AS shipper
+    
 FROM customers c
+
 LEFT JOIN orders o
+
     ON c.customer_id = o.customer_id
+    
 LEFT JOIN shippers sh
+
     ON o.shipper_id = sh.shipper_id
+    
 ORDER BY customer_id
 
+
 九、using
+
 当join两个列名相同时可以用来简化（内外链接都可以这么干）
+
 SELECT
+
     o.order_id,
+    
     c.first_name,
+    
     sh.name AS shipper
+    
 FROM orders o
+
 JOIN customers c
+
     USING (customer_id)
+    
 LEFT JOIN shippers sh
+
     USING (shipper_id)
+    
 ORDER BY order_id
 
+
 十、聚合函数
+
 聚合函数：输入一系列值并聚合为一个结果的函数
+
 Select Function(变量)...
+
 AVG(表达式) 返回表达式中所有的平均值。仅用于数字列并自动忽略NULL值。
 
 COUNT(表达式) 返回表达式中非NULL值的数量。可用于数字和字符列。
@@ -215,47 +295,83 @@ SUM(表达式) 返回表达式中所有的总和,忽略NULL值。仅用于数字
 
 实例
 USE sql_invoicing;
+
 SELECT 
+
     MAX(invoice_date) AS latest_date,  
+    
 -- SELECT选择的不仅可以是列，也可以是数字、列间表达式、列的聚合函数   
+
 MIN(invoice_total) lowest,
+
     AVG(invoice_total) average,
+    
     SUM(invoice_total * 1.1) total,
+    
     COUNT(*) total_records,
+    
     COUNT(invoice_total) number_of_invoices, 
+    
 -- 和上一个相等    
+
 COUNT(payment_date) number_of_payments,  
+
 -- 【聚合函数会忽略空值】，得到的支付数少于发票数    
+
 COUNT(DISTINCT client_id) number_of_distinct_clients
+
 -- DISTINCT client_id 筛掉了该列的重复值，再COUNT计数，会得到不同顾客数
+
 FROM invoicesWHERE invoice_date > '2019-07-01'  -- 想只统计下半年的结果
 
 
+
 十一、视图（类似C++的类）
+
 就是创建虚拟表，模块化一些重复性的查询模块，简化各种复杂操作（包括复杂的子查询和连接等）
+
 注意视图虽然可以像一张表一样进行各种操作，但并没有真正储存数据，数据仍然储存在原始表中，视图只是储存起来的模块化的查询结果，是为了方便和简化后续进一步操作而储存起来的虚拟表。
+
 例子:
+
 USE sql_invoicing;
+
 CREATE VIEW sales_by_client AS
+
     SELECT 
+    
         client_id,
+        
         name,
+        
         SUM(invoice_total) AS total_sales
+        
     FROM clients c
+    
     JOIN invoices i USING(client_id)
+    
 
 要用的时候:
+
 Select * 
+
 From sales_by_client
+
 即可查到上面的结果。
 
+
 删除:
+
 Drop View sales_by_client
 
+
 创建or更新视图:
+
 Create or Replace View xxx
 
+
 更新的方法:
+
 放到sql文件里面，用源码控制改变。, 通常放在 git repository（仓库）里与其它人共享，团队其他人因此能在自己的电脑上重建这个数据库
 
 
