@@ -61,18 +61,13 @@ group by：按id分别求和等。
 having：接在group by后面，如having sales＞500 and invoices ＜5。having必须跟着group by，跟where的区别在于一个筛选符合条件的聚合函数，一个非聚合
 
 一、正则（regexp）
-
-符号	意义
-
-^	    开头
-
-$	    结尾
-
-[abc]   含abc
-
-[a-c]	含a到c
-
-|	    或
+| 符号  | 意义 |
+| ------------- | ------------- |
+| ^  | 开头  |
+| $  | 结尾  |
+| [abc]  | 含abc  |
+| [a-c]  | 含a到c  |
+| |  | 或  |	    
 
 举例：
 
