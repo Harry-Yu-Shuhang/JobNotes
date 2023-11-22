@@ -2,7 +2,7 @@
 数据分析岗经常考察的sql题目
 
 创建表：
-
+```
 CREATE TABLE employees (
 
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,6 +14,7 @@ CREATE TABLE employees (
     email VARCHAR(100)
     
 );
+```
 
 删除表:
 
