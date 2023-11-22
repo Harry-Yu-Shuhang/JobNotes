@@ -1,6 +1,6 @@
-Mysql-面试经常考察的sql知识
+# Mysql-面试经常考察的sql知识
 
-# 零、基本操作篇
+## 零、基本操作篇
 创建表：
 ```
 CREATE TABLE employees (
@@ -60,7 +60,7 @@ group by：按id分别求和等。
 
 having：接在group by后面，如having sales＞500 and invoices ＜5。having必须跟着group by，跟where的区别在于一个筛选符合条件的聚合函数，一个非聚合
 
-# 一、正则（regexp）
+## 一、正则（regexp）
 | 符号  | 意义 |
 | ----- | --- |
 | ^ | 开头 |
@@ -94,7 +94,7 @@ where first_name regexp 'elka|ambur'
 ```
 
 
-# 二、order
+## 二、order
 练习
 
 订单2的商品按总价降序排列:
@@ -124,7 +124,7 @@ order by total_price desc
 asc升序，desc降序
 
 
-# 三、limit
+## 三、limit
 
 找出积分排名前三的死忠粉
 ```
