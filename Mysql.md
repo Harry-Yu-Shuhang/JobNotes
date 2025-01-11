@@ -172,6 +172,7 @@ on order.id=customer.id
 
 同样，inner join customer c就可以把customer简称c
 
+**inner join只保留两个表的交集，不像下文的left join 和 right join，会给没有的数据填充null**
 
 ## 六、自连接
 
