@@ -27,7 +27,7 @@ delete from table name
 
 where...
 ```
-**注意：sql里面比较不是==，而是=**
+**注意：sql里面比较不是==，而是=;判断null用is null/not null**
 
 删除列： 
 ```
